@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-const schema = mongoose.Schema
+const Schema = mongoose.Schema
 
 const Category = new Schema({
 	name: {require: true, type: String},
-	enabled: {type: Boolean, default: true},
-	pages: {type: Array}
+	route: {required: true, type: String},
+	enabled: {type: Boolean, default: true}
 })
 
-module exports = mongoose.model('Category', Category)
+module.exports = mongoose.model('Category', Category)
