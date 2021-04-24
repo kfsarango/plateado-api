@@ -78,5 +78,10 @@ userController.update = async (req, res) => {
     res.json({message: 'successfy', user})
 }
 
+userController.getTokenBAccess = async (req, res) => {
+    const token = await jwt.sign({check: true}, process.env.SECRET_KEY)
+    return res.json({token: token})
+}
+
 
 module.exports = userController

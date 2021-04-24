@@ -54,4 +54,24 @@ middleware.verifyMail = async (req, res, next) => {
     next()
 }
 
+middleware.checkAccesToken = async (req, res, next) => {
+    const token = req.headers['access-token']
+    if (!token) {
+        return res.status(401).json({
+            access: false,
+            message: 'No token provided'
+        })
+    }
+
+    try {
+        await jwt.verify(token, process.env.SECRET_KEY)
+    } catch(e) {
+        return res.status(401).json({
+            access: false,
+            message: 'token invalid'
+        })
+    }
+    next()
+}
+
 module.exports = middleware
